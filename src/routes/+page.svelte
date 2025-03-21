@@ -1,16 +1,11 @@
 <script>
 	import { appState } from '$lib/state.svelte';
+	import { onMount } from 'svelte';
 
-	appState.worker?.postMessage({
-		id: 'test',
-		python: 'print("Hello, world!")',
-		context: {}
+	onMount(async () => {
+		const res = await appState.worker?.runPython('print("Hello, world!")', {});
+		console.log(res);
 	});
-
-	if (appState.worker)
-		appState.worker.onmessage = (ev) => {
-			console.log(ev);
-		};
 </script>
 
 <h1>Welcome to SvelteKit</h1>
