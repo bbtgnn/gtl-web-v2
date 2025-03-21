@@ -3,9 +3,18 @@
 	import { onMount } from 'svelte';
 
 	onMount(async () => {
-		const res = await appState.worker?.runPython('print("Hello, world!")', {});
-		console.log(res);
+		appState.worker?.postMessage({
+			id: 'test',
+			python: 'print("Hello, world!")',
+			context: {}
+		});
 	});
+
+	if (appState.worker) {
+		appState.worker.onmessage = (event) => {
+			console.log(event);
+		};
+	}
 </script>
 
 <h1>Welcome to SvelteKit</h1>
