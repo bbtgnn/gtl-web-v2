@@ -1,5 +1,5 @@
 import type { ClientInit } from '@sveltejs/kit';
-import Worker from '$lib/worker?worker';
+import Worker from '$lib/worker?worker&inline';
 import { appState } from '$lib/state.svelte';
 import * as Comlink from 'comlink';
 import type { WorkerApi } from '$lib/worker';
