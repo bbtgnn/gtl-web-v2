@@ -1,9 +1,10 @@
 <script>
 	import { appState } from '$lib/state.svelte';
 	import { onMount } from 'svelte';
+	import py from './test.py?raw';
 
 	onMount(async () => {
-		const res = await appState.worker?.runPython('print("Hello, world!")', {});
+		const res = await appState.worker?.runPython(py, {});
 		console.log(res);
 	});
 </script>
