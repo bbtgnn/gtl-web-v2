@@ -32,6 +32,10 @@ export default defineConfig({
 		exclude: ['pyodide']
 	},
 
+	worker: {
+		format: 'es'
+	},
+
 	test: {
 		workspace: [
 			{
