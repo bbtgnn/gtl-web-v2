@@ -17,7 +17,7 @@ export function viteStaticCopyPyodide(): PluginOption {
 		targets: [
 			{
 				src: [join(pyodideDir, '*')].concat(PYODIDE_EXCLUDE),
-				dest: 'assets'
+				dest: '_app/immutable/workers'
 			}
 		]
 	});
