@@ -1,4 +1,5 @@
 from fontParts.world import NewFont
+import shutil
 
 # Create a new font
 font = NewFont()
@@ -50,5 +51,7 @@ for glyph_name in ["A", "B", "C"]:
     create_glyph(font, glyph_name)
 
 # Save the font as a UFO file
-font.save("SimpleFont.ufo")
+font_path = "SimpleFont.ufo"
+font.save(font_path)
 print("Font saved as SimpleFont.ufo")
+shutil.make_archive("font", "zip", ".", font_path)

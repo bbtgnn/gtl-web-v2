@@ -15,28 +15,30 @@ const api = {
 
 		await pyodide.loadPackage('micropip');
 		const micropip = pyodide.pyimport('micropip');
-		await micropip.install('fontParts');
 
 		//
 
-		await micropip.install([
-			'fonttools',
-			'defcon',
-			'fontParts',
-			'fontMath',
-			'fontPens',
-			'booleanOperations',
-			'pyclipper',
-			'fs',
-			'lxml'
-		]);
+		await micropip.install(
+			[
+				'fonttools[lxml,ufo,unicode]>=4.54.1',
+				'defcon',
+				'fontMath',
+				'fontPens',
+				'booleanOperations',
+				'pyclipper',
+				'fs',
+				'fontmake',
+				'fontParts'
+			],
+			true
+		);
 
 		// make a Python dictionary with the data from `context`
 		const dict = pyodide.globals.get('dict');
 		const globals = dict(Object.entries(context));
 		try {
-			const result = await pyodide.runPythonAsync(python, { globals });
-			return result ?? 12;
+			let x = await pyodide.runPythonAsync(python, { globals });
+			return pyodide.FS.readFile(x);
 		} catch (error) {
 			console.error(error);
 			if (!(error instanceof Error)) return 'Unknown error';
