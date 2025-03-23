@@ -1,8 +1,14 @@
 import * as Comlink from 'comlink';
 
+import font from './font.wasm?url';
+
 const api = {
 	makeFont: async (name: string) => {
-		console.log('makeFont', name);
+		const module = await WebAssembly.instantiateStreaming(fetch(font), {});
+		console.log(module);
+		// const instance = new WebAssembly.Instance(module);
+		// const result = instance.exports.makeFont(name);
+		// return result;
 	}
 };
 
